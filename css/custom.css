@@ -1,0 +1,49 @@
+body {
+    text-align: center;
+    background-color: #f5f5f5;
+}
+svg {
+    border: solid 1px;
+    background: white;
+}
+form input[type="number"],
+form input[type="color"]
+{
+    width: 3.5em;
+}
+label {
+    padding: 0 2px;
+    font-style: italic;
+    margin: 0 1ex;
+}
+button {
+    margin: 1em;
+}
+form {
+    display: inline-block;
+    width: auto;
+    margin: 1em;
+}
+legend {
+    padding: 0 1ex;
+}
+fieldset {
+    border: solid 1px;
+    margin: 1em;
+}
+ul {
+    text-align: left;
+    font-style: italic;
+}
+#config label {
+    display: block;
+}
+table {
+    margin: 0 auto;
+}
+td:first-child {
+    text-align: right;
+}
+#footer {
+    margin: 1em;
+}
