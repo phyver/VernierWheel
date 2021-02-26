@@ -4,7 +4,7 @@ var HEIGHT = 150; // height (mm) of svg element
 var N = 100;
 var D = 10;
 var SHOW_WHEEL = true;
-var WHEEL_DIAM = 75;
+var WHEEL_DIAM = 125;
 var WHEEL_OFFSET = 0;
 var SHOW_OFFSET = true;
 var SHOW_VERNIER_NUMBERS = true;
@@ -157,7 +157,7 @@ $(document).ready(function() {
 
     DRAW = SVG().addTo("#vernier").size(WIDTH + 'mm', HEIGHT + 'mm');
     draw();
-    $("svg").svgPanZoom();
+    svgPanZoom('svg');
 
     $("#N").bind("input", draw);
     $("#D").bind("input", draw);
@@ -177,5 +177,20 @@ $(document).ready(function() {
     $("#update_button").click(function() {
         $('#offset').val(Math.floor(Math.random()*N*10)/10);
         draw();
+    });
+
+    $(document).bind("keydown", function(e){
+        e = e || window.event;
+        var charCode = e.which || e.keyCode;
+        if(charCode == 83) {  // 83 : 's'
+            if ($("#show_offset").is(":checked")) {
+                $("#show_offset").prop("checked", false);
+                $('#offset').val(Math.floor(Math.random()*N*10)/10);
+                draw();
+            } else {
+                $("#show_offset").prop("checked", true);
+                draw();
+            }
+        }
     });
 });

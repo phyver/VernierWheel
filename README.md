@@ -23,11 +23,13 @@ A small utility to generate *Vernier scales* for safe lock manipulation.
 - choose *n*=1,
 - check the *show wheel offset* option (at the botom of the page)
 
+Pressing 's' should show the offset, or regenerate a new one (and hide it).
+
 
 ### Technology
 
-Simple HTML5, CSS, javascript with [jquery](https://jquery.com/) and
-[SVG.js](http://svgjs.com).
+Simple HTML5, CSS, javascript with [jquery](https://jquery.com/), 
+[SVG.js](http://svgjs.com) and [svg-pan-zoom (https://github.com/ariutta/svg-pan-zoom)].
 
 
 ### License
