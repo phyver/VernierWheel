@@ -9,6 +9,7 @@ var WHEEL_OFFSET = 0;
 var SHOW_OFFSET = true;
 var SHOW_VERNIER_NUMBERS = true;
 var VERNIER_NUMBERS_SIZE = 2;
+var VERNIER_NUMBERS_ROTATION = 0;
 var NB_VERNIERS = 1;
 var THIN_TICKS = 0.2;
 var THICK_TICKS = 0.3;
@@ -60,7 +61,7 @@ function draw_vernier() {
                 color: 'black',
             });
             if (SHOW_VERNIER_NUMBERS) {
-                g.text(d.toString()).font('size', VERNIER_NUMBERS_SIZE).center(0, -(WHEEL_DIAM / 2 + 6));
+                g.text(d.toString()).font('size', VERNIER_NUMBERS_SIZE).center(0, -(WHEEL_DIAM / 2 + 6)).rotate(VERNIER_NUMBERS_ROTATION);
             }
 
             g.rotate(offset + d * 360 * (D - 1) / (D * N), 0, 0);
@@ -124,6 +125,7 @@ function update_config() {
     SHOW_OFFSET = $("#show_offset").is(":checked");
     SHOW_VERNIER_NUMBERS = $("#vernier_numbers").is(":checked");
     VERNIER_NUMBERS_SIZE = parseFloat($("#vernier_numbers_size").val());
+    VERNIER_NUMBERS_ROTATION = parseInt($("#vernier_numbers_rotation").val());
 
     THIN_TICKS = parseFloat($("#thin_ticks").val());
     THICK_TICKS = parseFloat($("#thick_ticks").val());
@@ -167,9 +169,13 @@ $(document).ready(function() {
     $("#show_offset").bind("input", draw);
     $("#vernier_numbers").bind("input", draw);
     $("#vernier_numbers_size").bind("input", draw);
+    $("#vernier_numbers_rotation").bind("input", draw);
     $("#nb_verniers").bind("input", draw);
     $("#thin_ticks").bind("input", draw);
     $("#thick_ticks").bind("input", draw);
 
-    $("#update_button").click(draw);
+    $("#update_button").click(function() {
+        $('#offset').val(Math.floor(Math.random()*N*10)/10);
+        draw();
+    });
 });

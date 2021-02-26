@@ -47,10 +47,6 @@
                 <input id="nb_verniers" type="number" step="1" required min="1" value="1">
             </label>
 
-            <label for="wheel">show wheel
-                <input id="wheel" type="checkbox" checked>
-            </label>
-
             <button type="button" id="update_button">Update</button>
 
 
@@ -84,6 +80,16 @@
                     </td>
                 </tr>
 
+                <tr><td colspan="2"><hr/></td></tr>
+
+                <tr>
+                    <td>
+                        <label for="wheel">show wheel
+                    </td><td>
+                        <input id="wheel" type="checkbox" checked>
+                    </td>
+                </tr>
+
                 <tr>
                     <td>
                         <label for="diameter">wheel diameter (mm)</label>
@@ -95,7 +101,7 @@
                     <td>
                         <label for="offset">wheel offset</label>
                     </td><td>
-                        <input id="offset" type="number" step="any" required min="0" value="15.3">
+                        <input id="offset" type="number" step="any" required min="0" value="0">
                     </td>
                 </tr>
                 <tr>
@@ -105,6 +111,9 @@
                         <input id="show_offset" type="checkbox">
                     </td>
                 </tr>
+
+                <tr><td colspan="2"><hr/></td></tr>
+
                 <tr>
                     <td>
                         <label for="vernier_numbers">show Vernier numbers</label>
@@ -117,6 +126,13 @@
                         <label for="vernier_numbers_size">size of Vernier numbers</label>
                     </td><td>
                         <input id="vernier_numbers_size" type="number" step=".1" required min="1" value="2">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="vernier_numbers_rotation">rotation of Vernier numbers</label>
+                    </td><td>
+                        <input id="vernier_numbers_rotation" type="number" step="1" required min="-360" max="360" value="0">
                     </td>
                 </tr>
                 <tr>
