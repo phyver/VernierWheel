@@ -4,159 +4,196 @@
   <meta charset="UTF-8">
   <title>Vernier Scales for Safe Lock Manipulation</title>
 
-   <link rel="stylesheet" href="./css/normalize.css">
-   <link rel="stylesheet" href="./css/custom.css">
+  <link rel="stylesheet" href="./css/normalize.css">
+  <link rel="stylesheet" href="./css/custom.css">
 
-   <script src="./js/jquery-3.4.1.slim.min.js"></script>
-   <script src="./js/svg.min.js"></script>
-   <script src="./js/svg-pan-zoom.min.js"></script>
-   <script src="./js/vernier.js"></script>
+  <script src="./js/jquery-3.4.1.slim.min.js"></script>
+  <script src="./js/svg.min.js"></script>
+  <script src="./js/svg-pan-zoom.min.js"></script>
+  <script src="./js/vernier.js"></script>
 
 </head>
 <body>
 
-    <div id="no_javascript">
-        This page is useless without Javascript!
-    </div>
+  <div id="no_javascript">
+    This page is useless without Javascript!
+  </div>
 
-    <h1>Vernier Scales for Safe Locks Manipulation</h1>
+  <h1>Vernier Scales for Safe Locks Manipulation</h1>
 
-    <div id="vernier">
-        <!-- SVG element inserted here... -->
-    </div>
-    <div>
-        <a download="vernier.svg" id="download_svg">download SVG file</a>
-    </div>
-    <div>
-        (<small>use Inkscape or convert to PDF first to print to scale</small>)
-    </div>
+  <div id="vernier">
+    <!-- SVG element inserted here... -->
+  </div>
 
-    <form>
-        <fieldset id="parameters">
-            <legend>  parameters  </legend>
+  <div>
+    <a download="vernier.svg" id="download_svg">download SVG file</a>
+  </div>
 
-            <label for="N">N
-                <input id="N" type="number" step="1" required min="3" max="500" value="100">
-            </label>
+  <div>
+    (<small>use Inkscape or convert to PDF first to print to scale</small>)
+  </div>
 
-            <label for="D">D
-                <input id="D" type="number" step="1" required min="2" max="32" value="10">
-            </label>
+  <div id="help">
+    <p>
+      By default, this page runs in "training" mode: you can try reading the
+      wheel offset using the Vernier scale.
+    </p>
 
-            <label for="nb_verniers">n
-                <input id="nb_verniers" type="number" step="1" required min="1" value="1">
-            </label>
+    <p>
+      Pressing the 's' key should show the wheel offset, and pressing 's'
+      again should draw another offset at random (and hide its value).
+    </p>
 
-            <button type="button" id="update_button">Update</button>
+    <p>
+      To generate a vernier scale for actual manipulation, uncheck the
+      "training mode" box in the "Vernier parameters" section. You should of
+      course set all other parameters to relevant values. The <i>n</i>
+      parameter allows to get several scales in a single file, which is handy
+      if you need more than one.
+    </p>
+
+    <p>
+      <a href="https://github.com/phyver/VernierWheel">(sources on github)</a>
+    </p>
+
+  </div>
+
+  <form>
+    <fieldset id="parameters">
+      <legend>Vernier parameters</legend>
+
+      <table>
+        <tr>
+          <td>
+            <label for="N">number graduations on the wheel: N</label>
+          </td><td>
+            <input id="N" type="number" step="1" required min="3" max="500" value="100">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="D">precision of Vernier scale (inverse of Vernier constant): D</label>
+          </td><td>
+            <input id="D" type="number" step="1" required min="2" max="32" value="10">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="nb_verniers">number of Vernier scales around the wheels: n</label>
+          </td><td>
+            <input id="nb_verniers" type="number" step="1" required min="1" value="1">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="diameter">wheel diameter (mm)</label>
+          </td><td>
+            <input id="diameter" type="number" step="any" required min="10" value="125">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="wheel">training mode</label>
+          </td><td>
+            <input id="wheel" type="checkbox" checked>
+          </td>
+        </tr>
+      </table>
+
+      <button type="button" id="update_button">Update</button>
+
+    </fieldset>
+
+    <fieldset id="training">
+      <legend>training parameters</legend>
+
+      <table>
+        <tr>
+          <td>
+            <label for="offset">wheel offset</label>
+          </td><td>
+            <input id="offset" type="number" step="any" required min="0" value="0">
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <label for="show_offset">show wheel offset</label>
+          </td><td>
+            <input id="show_offset" type="checkbox">
+          </td>
+        </tr>
+
+      </table>
+
+    </fieldset>
 
 
-        <small>
-        <ul>
-            <li>N: number graduations on the wheel</li>
-            <li>D: precision of Vernier scale (inverse of Vernier constant)</li>
-            <li>n: number of Vernier scales around the wheels</li>
-        </ul>
-        </small>
+    <fieldset id="config">
+      <legend>preferences</legend>
 
-        </fieldset>
+      <table>
+        <tr>
+          <td>
+            <label for="vernier_numbers">show Vernier numbers</label>
+          </td><td>
+            <input id="vernier_numbers" type="checkbox" checked>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="vernier_numbers_size">size of Vernier numbers</label>
+          </td><td>
+            <input id="vernier_numbers_size" type="number" step=".1" required min="1" value="2">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="vernier_numbers_rotation">rotation of Vernier numbers</label>
+          </td><td>
+            <input id="vernier_numbers_rotation" type="number" step="1" required min="-360" max="360" value="0">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="thin_ticks">width of "thin" Vernier ticks (mm)</label>
+          </td><td>
+            <input id="thin_ticks" type="number" step=".1" required min=".1" value="0.2">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="thick_ticks">width of "thick" Vernier ticks (mm)</label>
+          </td><td>
+            <input id="thick_ticks" type="number" step=".1" required min=".1" value="0.3">
+          </td>
+        </tr>
 
-        <fieldset id="config">
-            <legend>  preferences  </legend>
+        <tr><td colspan="2"><hr/></td></tr>
 
-            <table>
-                <tr>
-                    <td>
-                        <label for="width">frame width (mm)</label>
-                    </td><td>
-                        <input id="width" type="number" step="1" required min="50" value="150">
-                    </td>
-                </tr>
+        <tr>
+          <td>
+            <label for="width">frame width (mm)</label>
+          </td><td>
+            <input id="width" type="number" step="1" required min="50" value="150">
+          </td>
+        </tr>
 
-                <tr>
-                    <td>
-                        <label for="height">frame height (mm)</label>
-                    </td><td>
-                        <input id="height" type="number" step="1" required min="50" value="150">
-                    </td>
-                </tr>
+        <tr>
+          <td>
+            <label for="height">frame height (mm)</label>
+          </td><td>
+            <input id="height" type="number" step="1" required min="50" value="150">
+          </td>
+        </tr>
+      </table>
 
-                <tr><td colspan="2"><hr/></td></tr>
+    </fieldset>
+  </form>
 
-                <tr>
-                    <td>
-                        <label for="wheel">show wheel
-                    </td><td>
-                        <input id="wheel" type="checkbox" checked>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <label for="diameter">wheel diameter (mm)</label>
-                    </td><td>
-                        <input id="diameter" type="number" step="any" required min="10" value="125">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="offset">wheel offset</label>
-                    </td><td>
-                        <input id="offset" type="number" step="any" required min="0" value="0">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="show_offset">show wheel offset</label>
-                    </td><td>
-                        <input id="show_offset" type="checkbox">
-                    </td>
-                </tr>
-
-                <tr><td colspan="2"><hr/></td></tr>
-
-                <tr>
-                    <td>
-                        <label for="vernier_numbers">show Vernier numbers</label>
-                    </td><td>
-                        <input id="vernier_numbers" type="checkbox" checked>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="vernier_numbers_size">size of Vernier numbers</label>
-                    </td><td>
-                        <input id="vernier_numbers_size" type="number" step=".1" required min="1" value="2">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="vernier_numbers_rotation">rotation of Vernier numbers</label>
-                    </td><td>
-                        <input id="vernier_numbers_rotation" type="number" step="1" required min="-360" max="360" value="0">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="thin_ticks">width of "thin" Vernier ticks (mm)</label>
-                    </td><td>
-                        <input id="thin_ticks" type="number" step=".1" required min=".1" value="0.2">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="thick_ticks">width of "thick" Vernier ticks (mm)</label>
-                    </td><td>
-                        <input id="thick_ticks" type="number" step=".1" required min=".1" value="0.3">
-                    </td>
-                </tr>
-            </table>
-
-        </fieldset>
-    </form>
-
-    <div id="footer">
-        <a href="mailto:pierre.hyvernat@univ-smb.fr?subject=vernier.js">contact</a>
-    </div>
+  <div id="footer">
+    <a href="mailto:pierre.hyvernat@univ-smb.fr?subject=vernier.js">contact</a>
+  </div>
 
 </body>
 </html>

@@ -44,6 +44,13 @@ table {
 td:first-child {
     text-align: right;
 }
+#help {
+    border: dotted 1px;
+    padding: 1em;
+    margin: 1em;
+    text-align: left;
+    font-size: 75%;
+}
 #footer {
     margin: 1em;
 }
